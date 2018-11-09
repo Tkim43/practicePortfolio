@@ -1,0 +1,9 @@
+.contact-form{
+    padding: 2vh 0;
+}
+.email-input{
+    width: 55%;
+    font-size: 1.2em;
+    text-align: center;
+    color: black;
+}
