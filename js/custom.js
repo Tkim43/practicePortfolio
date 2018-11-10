@@ -1,20 +1,39 @@
-$(document).ready(()=>{
-    $("#send-button").click(sendEmail);
+$(document).ready(function(){
+    $("#send-button").click( sendEmail );
 });
 
+
 function sendEmail(){
-    console.log("email function");
-    debugger;
     const email = $('.email-input').val();
-    const testPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(testPattern.test(email)){
-        displayError("email was good");
-    }
-    else{
-        displayError("email was wrong")
+
+    const testValues = [
+        {
+            field: '.name-input',
+            regex: /[a-zA-Z ]{3,}/,
+            message: 'name is invalid'
+        },
+        {
+            field: '.email-input',
+            regex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: 'email is invalid'
+        },
+        {
+            field: '.age-input',
+            regex: /\d{1,3}/,
+            message: 'age is invalid'
+        },
+    ]
+
+    for(let i=0; i< testValues.length; i++){
+        var value = $( testValues[i].field ).val();
+        if( testValues[i].regex.test( value )){
+            displayError(testValues[i].field, '');
+        } else {
+            displayError(testValues[i].field, testValues[i].message);
+        }
     }
 }
 
-function displayError(input, message){
-    $(input).parent().find('.error-message').text(message);
+function displayError( input, message ){
+    $(input).parent().find('.error-message').text( message );
 }
