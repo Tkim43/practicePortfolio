@@ -7,3 +7,10 @@
     text-align: center;
     color: black;
 }
+.error-container{
+    position: relative;
+}
+.error-message{
+    position: absolute;
+    line-height: 2em;
+}
